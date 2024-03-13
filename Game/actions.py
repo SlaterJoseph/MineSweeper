@@ -9,6 +9,18 @@ def mark_flag(row: int, col: int, board: list) -> None:
     board[row][col] = -2
 
 
+def unmark_flag(row: int, col: int, game_board: list, state_board: list) -> None:
+    """
+    Sets a flagged cell back, so it is unflagged
+    :param row: The row of the cell
+    :param col: The col of the cell
+    :param game_board: The board the user is playing on
+    :param state_board: The saved original board
+    :return: None
+    """
+    game_board[row][col] = state_board[row][col]
+
+
 def clicked_cell(row: int, col: int, board: list) -> int or list:
     """
     Checks the given cell, showing the proper value
@@ -51,6 +63,8 @@ def clicked_cell(row: int, col: int, board: list) -> int or list:
                         continue
 
                     result.append((i, j))
+    else:
+        result = board[row][col]
 
     return result
 
@@ -63,9 +77,15 @@ def check_victory(back_board: list, front_board: list):
     :return: True or false based on if the boards match
     """
     # Convert all flags back into mines
-    for x in front_board:
-        for y in front_board:
-            if front_board[x][y] == -2:
-                front_board[x][y] = -1
+    if len(back_board) != len(front_board):
+        return False
 
-    return back_board == front_board
+    for i in range(len(back_board)):
+        if len(back_board[i]) != len(front_board[i]):
+            return False
+
+        for j in range(len(back_board[i])):
+            if back_board[i][j] != front_board[i][j]:
+                return False
+
+    return True
