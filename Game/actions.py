@@ -7,6 +7,7 @@ def mark_flag(row: int, col: int, board: list) -> None:
     :return: None
     """
     board[row][col] = -2
+    return None
 
 
 def unmark_flag(row: int, col: int, game_board: list, state_board: list) -> None:
@@ -19,6 +20,7 @@ def unmark_flag(row: int, col: int, game_board: list, state_board: list) -> None
     :return: None
     """
     game_board[row][col] = state_board[row][col]
+    return None
 
 
 def clicked_cell(row: int, col: int, board: list) -> int or list:
