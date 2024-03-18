@@ -1,10 +1,11 @@
 import random
 
 
-def generate_board(board: list, row: int, col: int, mine_count: int) -> list or int:
+def generate_board(row_count: int, col_count: int, row: int, col: int, mine_count: int) -> list or int:
     """
     Generates the playing board for minesweeper
-    :param board: A board of 0s to be altered to our gameboard
+    :param row_count: The amount of rows in the board
+    :param col_count: The amount of cols in the board
     :param row: The first cell's row (MUST BE SAFE)
     :param col: The first cell's column (MUST BE SAFE)
     :param mine_count: The amount of mines the user selected
@@ -16,10 +17,11 @@ def generate_board(board: list, row: int, col: int, mine_count: int) -> list or 
         return -1
 
     # Flag for invalid mine count on the large end
-    if mine_count > len(board) * len(board[0]):
+    if mine_count > row_count * col_count:
         return -2
 
     mines = 0
+    board = [[0 for _ in range(row_count)] for _ in range(col_count)]
     # Placing the mines
     while mines < mine_count:
         r = random.randint(0, len(board) - 1)

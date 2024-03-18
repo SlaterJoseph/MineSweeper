@@ -53,11 +53,17 @@ def clicked_cell(row: int, col: int, board: list) -> int or list:
 
             # Add all cells which need to revealed
             for i in range(r - 1, r + 2):
+                if i < 0 or i > len(board) - 1:
+                    continue
+
                 for j in range(c - 1, c + 2):
+                    if j < 0 or j > len(board[i]) - 1 or (i, j) in checked:
+                        continue
+
                     cell = board[i][j]
 
                     # Add empty cells to the queue
-                    if cell == 0:
+                    if cell == 0 and (i, j) not in checked:
                         queue.append((i, j))
 
                     # Ignore flags -- If one is here it's the players fault so they must unflag it
@@ -78,16 +84,9 @@ def check_victory(back_board: list, front_board: list):
     :param front_board: The board altered by the player
     :return: True or false based on if the boards match
     """
-    # Convert all flags back into mines
-    if len(back_board) != len(front_board):
-        return False
-
     for i in range(len(back_board)):
-        if len(back_board[i]) != len(front_board[i]):
-            return False
-
-        for j in range(len(back_board[i])):
+        for j in range(len(back_board[0])):
             if back_board[i][j] != front_board[i][j]:
-                return False
-
+                if back_board[i][j] not in [-1, -2] or front_board[i][j] not in [-1, -2]:
+                    return False
     return True
