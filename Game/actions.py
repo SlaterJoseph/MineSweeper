@@ -66,7 +66,7 @@ def clicked_cell(row: int, col: int, board: list) -> int or list:
                     if cell == 0 and (i, j) not in checked:
                         queue.append((i, j))
 
-                    # Ignore flags -- If one is here it's the players fault so they must unflag it
+                    # Ignore flags -- If one is here it's the players fault, so they must unflag it
                     if cell == -2:
                         continue
 
