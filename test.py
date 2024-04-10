@@ -1,3 +1,5 @@
-from Game.play import game
+from cryptography.fernet import Fernet
 
-game()
+key = Fernet.generate_key()
+with open('key.key', 'wb') as file:
+    file.write(key)

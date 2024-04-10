@@ -10,16 +10,15 @@ def mark_flag(row: int, col: int, board: list) -> None:
     return None
 
 
-def unmark_flag(row: int, col: int, game_board: list, state_board: list) -> None:
+def unmark_flag(row: int, col: int, game_board: list) -> None:
     """
     Sets a flagged cell back, so it is unflagged
     :param row: The row of the cell
     :param col: The col of the cell
     :param game_board: The board the user is playing on
-    :param state_board: The saved original board
     :return: None
     """
-    game_board[row][col] = state_board[row][col]
+    game_board[row][col] = -10
     return None
 
 

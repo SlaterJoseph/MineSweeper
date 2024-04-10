@@ -22,6 +22,7 @@ def generate_board(row_count: int, col_count: int, row: int, col: int, mine_coun
 
     mines = 0
     board = [[0 for _ in range(row_count)] for _ in range(col_count)]
+
     # Placing the mines
     while mines < mine_count:
         r = random.randint(0, len(board) - 1)

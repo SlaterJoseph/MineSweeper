@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from ...Game.generation import generate_board
+from ...Gameplay.play import game
 
 actions_bp = Blueprint('gameplay', __name__)
 
@@ -24,6 +24,6 @@ def generate_board():
     col = data.get('col')
     mine_count = data.get('mine_count')
 
-    board = generate_board(row_count, col_count, row, col, mine_count)
+    game(row_count, col_count, mine_count)
 
 
