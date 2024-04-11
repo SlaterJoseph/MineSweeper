@@ -19,7 +19,7 @@ def generation(row_count: int, col_count: int, mine_count: int, row: int, col: i
     return game_board, solved_board
 
 
-def make_move(row: int, col: int, action: str, game_board: list, solved_board: list) -> (list, bool):
+def process_move(row: int, col: int, action: str, game_board: list, solved_board: list) -> (list, bool):
     """
     Takes the action of the user to the game board
     :param row: The row of the clicked cell
@@ -29,5 +29,5 @@ def make_move(row: int, col: int, action: str, game_board: list, solved_board: l
     :param solved_board: The completed board
     :return:
     """
-    game_lost = move(game_board, solved_board, row, col, action)
-    return game_board, game_lost
+    game_completed, victory = move(game_board, solved_board, row, col, action)
+    return game_board, game_completed

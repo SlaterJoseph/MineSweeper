@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from Web.Game.service import generation, make_move
+from Web.Game.service import generation, process_move
 from cryptography.fernet import Fernet
 from ..utils import decrypt_board
 import base64
@@ -48,9 +48,9 @@ def make_move():
     col = int(data.get('col'))
     action = str(data.get('action'))
     game_board = json.loads(str(data.get('game_board')))
-    solved_board = decrypt_board(json.loads(str(data.get('solved_board'))))
+    solved_board = decrypt_board((str(data.get('solved_board'))))
 
-    game_board, game_lost = make_move(row, col, action, game_board, solved_board)
+    game_board, game_lost = process_move(row, col, action, game_board, solved_board)
 
     return jsonify({
         'game_board': game_board,
